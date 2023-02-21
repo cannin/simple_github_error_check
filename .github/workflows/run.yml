@@ -16,5 +16,5 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Run a one-line script
-        run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 | read input && [ "$input" = "Release 8.4 (July 2024)" ] && echo "OK" || exit 1
+      - name: Run check
+        run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 | read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "OK" || exit 1
