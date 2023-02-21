@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  schedule:
+    - cron:  '0 4 * * *'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run a one-line script
+        run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 | read input && [ "$input" = "Release 8.4 (July 2024)" ] && echo "OK" || exit 1
