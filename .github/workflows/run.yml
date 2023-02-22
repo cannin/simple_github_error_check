@@ -22,10 +22,13 @@ jobs:
         run: sudo wget https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_amd64.zip; sudo unzip pup_v0.4.0_linux_amd64.zip -d /usr/local/bin 
       - name: Debug
         run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 | cat
-      - name: Debug
+      - name: Get Version
         run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 >> version.txt; echo "version=$(cat version.txt)" >> $GITHUB_ENV        
-      - name: Run check
-        run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 #| read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "OK" || exit 1
-      - name: Run check 2
+
+      # This command should should work locally
+      #- name: Run Check (Ignore) 
+      #  run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 #| read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "OK" || exit 1
+      
+      - name: Run Check
         if: ${{ env.version != env.expected_version }}
         run: exit 1
