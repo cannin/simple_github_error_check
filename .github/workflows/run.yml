@@ -32,6 +32,6 @@ jobs:
         
       # This command should should work locally
       #- name: Run Check (Ignore) 
-      #  run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 #| read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "OK" || exit 1
+      #  run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 | read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "OK" || exit 1
       
 
