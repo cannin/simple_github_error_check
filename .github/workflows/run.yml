@@ -13,7 +13,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      expected_version: Release 8.4 (July 2024)
+      
     steps:
       - uses: actions/checkout@v3
       - name: Install
@@ -25,5 +27,5 @@ jobs:
       - name: Run check
         run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 #| read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "OK" || exit 1
       - name: Run check 2
-        if: ${{ env.version != "Release 8.4 (July 2024)" }}
+        if: ${{ env.version != env.expected_version }}
         run: exit 1
