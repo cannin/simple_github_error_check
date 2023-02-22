@@ -17,6 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install
-        run: sudo apt-get -yqq install golang-go; export PATH=$PATH:$(go env GOPATH)/bin; go install github.com/ericchiang/pup@latest
+        run: wget https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_amd64.zip | sudo unzip pup_v0.4.0_linux_amd64.zip -d /usr/local/bin 
       - name: Run check
         run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 | read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "OK" || exit 1
