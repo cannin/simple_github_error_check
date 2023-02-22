@@ -17,6 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install
-        run: sudo apt-get -yqq install golang-go; go install github.com/ericchiang/pup@latest; export PATH=$PATH:$(go env GOPATH)/bin
+        run: sudo apt install -yqq cargo; cargo install htmlq
       - name: Run check
-        run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 | read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "OK" || exit 1
+        run: curl -s https://www.cancerrxgene.org/news | htmlq --text b | head -n 1 | read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "" || exit 1
