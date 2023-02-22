@@ -14,7 +14,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      expected_version: Release 8.4 (July 2024)
+      expected_version: Release 8.4 (July 2022)
       
     steps:
       - uses: actions/checkout@v3
@@ -24,11 +24,12 @@ jobs:
         run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 | cat
       - name: Get Version
         run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 >> version.txt; echo "version=$(cat version.txt)" >> $GITHUB_ENV        
-
+      - name: Run Check
+        if: ${{ env.version != env.expected_version }}
+        run: exit 1
+        
       # This command should should work locally
       #- name: Run Check (Ignore) 
       #  run: curl -s https://www.cancerrxgene.org/news | pup 'b text{}' | head -n 1 #| read input && [ "$input" = "Release 8.4 (July 2022)" ] && echo "OK" || exit 1
       
-      - name: Run Check
-        if: ${{ env.version != env.expected_version }}
-        run: exit 1
+
